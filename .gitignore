@@ -214,3 +214,4 @@ __marimo__/
 *.wal
 *.duckdb
 
+*test.sql
