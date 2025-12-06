@@ -51,3 +51,27 @@ GROUP BY actor_name
 ORDER BY number_of_films DESC
 LIMIT 10; 
 
+
+-- Join for top 5 paying customers
+SELECT
+    DISTINCT c.first_name || ' ' || c.last_name AS customer_name,
+    ROUND(SUM(p.amount)) AS amount
+FROM
+    customer c
+    INNER JOIN payment p ON c.customer_id = p.customer_id
+GROUP BY customer_name
+ORDER BY amount DESC
+LIMIT 5;
+
+
+-- Join for revenue categories bring in
+SELECT
+    DISTINCT c.name,
+    SUM(p.amount) AS amount
+FROM category c
+    LEFT JOIN film_category fc ON c.category_id = fc.category_id
+    LEFT JOIN inventory i ON fc.film_id = i.film_id
+    LEFT JOIN rental r ON r.inventory_id = i.inventory_id
+    LEFT JOIN payment p ON p.rental_id = r.rental_id
+GROUP BY c.name
+ORDER BY c.name;
