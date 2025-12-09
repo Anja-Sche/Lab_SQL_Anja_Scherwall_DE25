@@ -75,3 +75,44 @@ FROM category c
     LEFT JOIN payment p ON p.rental_id = r.rental_id
 GROUP BY c.name
 ORDER BY c.name;
+
+
+-- All movies with revenue less than three dollars
+SELECT
+    DISTINCT f.title,
+    ROUND(SUM(rental_rate),2) as film_revenue    
+FROM 
+    film f
+    LEFT JOIN inventory i ON f.film_id = i.film_id
+    LEFT JOIN rental r ON r.inventory_id = i.inventory_id
+GROUP BY f.title
+HAVING film_revenue < 3
+ORDER BY film_revenue ASC;
+
+
+--  Times categories have been rented and the revenue
+SELECT
+    DISTINCT c.name,
+    COUNT(rental_rate) AS times_rented,
+    ROUND(SUM(p.amount),2) AS revenue_per_category,
+FROM 
+    film f
+    LEFT JOIN inventory i ON f.film_id = i.film_id
+    LEFT JOIN rental r ON r.inventory_id = i.inventory_id
+    LEFT JOIN film_category fc ON fc.film_id = f.film_id
+    LEFT JOIN category c ON c.category_id = fc.category_id
+    LEFT JOIN payment p ON p.rental_id = r.rental_id
+GROUP BY  c.name
+ORDER BY times_rented DESC, revenue_per_category DESC;
+
+
+-- Amount of movies, otal income and average income per movie of each store
+SELECT
+    distinct i.store_id,
+    COUNT(DISTINCT i.inventory_id) AS store_inventory,
+    ROUND(SUM(p.amount),2) AS store_revenue,
+    ROUND(store_revenue/store_inventory, 2) AS average_revenue_per_movie
+FROM inventory i
+    LEFT JOIN rental r ON r.inventory_id = i.inventory_id
+    LEFT JOIN payment p ON p.rental_id = r.rental_id
+GROUP BY i.store_id;
