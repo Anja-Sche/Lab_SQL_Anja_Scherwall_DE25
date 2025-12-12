@@ -6,14 +6,25 @@ DATA_PATH = Path(__file__).parent / "data"
 SQLITE_PATH = DATA_PATH / "sqlite-sakila.db"
 DUCKDB_PATH = DATA_PATH / "sakila.duckdb"
 
+DASHBOARD_PATH = Path(__file__).parent / "dashboard" / "sources" / "sakila" / "sakila.duckdb"
+
 source = sql_database(credentials=f"sqlite:///{SQLITE_PATH}", schema="main")
 
-pipeline = dlt.pipeline(
+#placing the tables in main schema
+pipeline_data = dlt.pipeline(
     pipeline_name = "sakila_sqlite_duckdb",
     destination = dlt.destinations.duckdb(str(DUCKDB_PATH)),
+    dataset_name = "staging"
 )
-#placing the tables in main schema
 
-load_info = pipeline.run(source, write_disposition="replace")
+pipeline_dashboard = dlt.pipeline(
+    pipeline_name = "sakila_sqlite_duckdb_dashboard",
+    destination = dlt.destinations.duckdb(str(DASHBOARD_PATH)),
+    dataset_name = "staging"
+)
 
-print(load_info)
+load_info_data = pipeline_data.run(source, write_disposition="replace")
+load_info_dashboard = pipeline_dashboard.run(source, write_disposition="replace")
+
+print(load_info_data)
+print(load_info_dashboard)
