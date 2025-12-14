@@ -31,11 +31,10 @@ FROM
 -- most expensive movies to rent per day
 SELECT
     title,
-    rental_rate,
-    rental_duration,
     ROUND(rental_rate / rental_duration, 2) AS rate_per_day
 FROM
     film
+GROUP BY rate_per_day, title
 ORDER BY
     rate_per_day DESC
 LIMIT
@@ -106,7 +105,7 @@ GROUP BY  c.name
 ORDER BY times_rented DESC, revenue_per_category DESC;
 
 
--- Amount of movies, otal income and average income per movie of each store
+-- Amount of movies, total income and average income per movie of each store
 SELECT
     distinct i.store_id,
     COUNT(DISTINCT i.inventory_id) AS store_inventory,
