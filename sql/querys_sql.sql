@@ -21,10 +21,10 @@ WHERE
 
 -- calculating statistics on the length of all movies
 SELECT
-    MIN(length) AS hortest_movie_min,
-    ROUND(AVG(length)) AS average_movie_min,
-    MEDIAN (length) AS median_length_min,
-    MAX(length) AS longest_movie_min
+    MIN(length)::int || ' minutes' AS shortest_movie,
+    ROUND(AVG(length))::int || ' minutes' AS average_movie,
+    MEDIAN(length)::int || ' minutes' AS median_movie,
+    MAX(length)::int || ' minutes' AS longest_movie
 FROM
     film;
 
@@ -36,7 +36,7 @@ FROM
     film
 GROUP BY rate_per_day, title
 ORDER BY
-    rate_per_day DESC
+    rate_per_day DESC, title ASC
 LIMIT
     10;
 
