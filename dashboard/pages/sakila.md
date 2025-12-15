@@ -124,9 +124,15 @@ ORDER BY
     You can also choose to see the revenue per category for each store.
 </Details>
 
-<Dropdown data={store_revenue} name=store value=store_id_str 
+```sql stores
+SELECT
+    DISTINCT 'Store ' || CAST(store_id::int AS VARCHAR) AS store_id_str
+FROM sakila.income;
+```
+
+<Dropdown data={stores} name=store value=store_id_str 
  title="Select store">
-    <DropdownOption value="%" valueLabel="Stores"/>
+    <DropdownOption value="%" valueLabel="Both Stores"/>
 </Dropdown>
 
 ```sql store_revenue
