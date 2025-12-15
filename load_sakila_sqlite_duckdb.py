@@ -10,7 +10,7 @@ DASHBOARD_PATH = Path(__file__).parent / "dashboard" / "sources" / "sakila" / "s
 
 source = sql_database(credentials=f"sqlite:///{SQLITE_PATH}", schema="main")
 
-#placing the tables in main schema
+
 pipeline_data = dlt.pipeline(
     pipeline_name = "sakila_sqlite_duckdb",
     destination = dlt.destinations.duckdb(str(DUCKDB_PATH)),
