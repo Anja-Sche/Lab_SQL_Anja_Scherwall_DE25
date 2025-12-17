@@ -1,7 +1,7 @@
 ---
 title: Movie length
 ---
-- Klick on the informatoin text underneath the names to se information abot the result.<LineBreak lines=2/>
+- Klick on the informatoin text underneath the names to se information about the result.<LineBreak lines=2/>
 
 ## The rate of a movie, per day
 <Details title='Information about graph'>

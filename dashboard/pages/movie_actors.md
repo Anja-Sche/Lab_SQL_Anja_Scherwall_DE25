@@ -1,7 +1,7 @@
 ---
 title: Actors
 ---
-- Klick on the informatoin text underneath the name to se information abot the result.<LineBreak lines=2/>
+- Klick on the informatoin text underneath the name to se information about the result.<LineBreak lines=2/>
 
 ## Actors who played in most movies
 <Details title='Information about graph'>
