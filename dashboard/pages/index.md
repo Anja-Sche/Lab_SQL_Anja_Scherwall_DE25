@@ -1,10 +1,10 @@
 ---
-title: Welcome to 
+title: Welcome to DVD rental dashboard
 ---
 
     ### This dashboard visualize analyses from the DVD rental data. 
     <LineBreak lines=1/>
-    Here you will se different tables and graphs that shows the result from EDA, Exploratory Data Analysis.
+    Here you will se different tables and graphs that shows the result from the data analysis.
     It will give an insight to the data, the movies and the stores.
 
     <LineBreak lines=2/>
